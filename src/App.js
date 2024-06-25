@@ -14,7 +14,7 @@ function App() {
   const getTasks = async () => {
     try {
       const res = await api.get("/tasks");
-      setTodoList((prev) => [...prev, ...res.data.data]);
+      setTodoList(res.data.data);
     } catch (err) {
       console.error("getTasks error", err.message);
     }
