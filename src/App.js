@@ -12,9 +12,12 @@ function App() {
   const [todoValue, setTodoValue] = useState("");
 
   const getTasks = async () => {
-    const res = await api.get("/tasks");
-
-    setTodoList(res.data.data);
+    try {
+      const res = await api.get("/tasks");
+      setTodoList((prev) => [...prev, ...res.data.data]);
+    } catch (err) {
+      console.error("getTasks error", err.message);
+    }
   };
 
   const addTask = async () => {
