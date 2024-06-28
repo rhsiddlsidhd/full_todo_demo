@@ -1,7 +1,7 @@
 import React from "react";
 import TodoItem from "./TodoItem";
 
-const TodoBoard = ({ todoList, deleteTask, putTask }) => {
+const TodoBoard = ({ todoList, handleDeleteTask, toggleIsComplete }) => {
   return (
     <div>
       <h2>Todo List</h2>
@@ -10,8 +10,8 @@ const TodoBoard = ({ todoList, deleteTask, putTask }) => {
           <TodoItem
             item={item}
             key={index}
-            deleteTask={deleteTask}
-            putTask={putTask}
+            handleDeleteTask={handleDeleteTask}
+            toggleIsComplete={toggleIsComplete}
           />
         ))
       ) : (

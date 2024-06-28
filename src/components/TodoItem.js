@@ -1,17 +1,23 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 
-const TodoItem = ({ item, deleteTask, putTask }) => {
+const TodoItem = ({ item, handleDeleteTask, toggleIsComplete }) => {
   return (
     <Row>
       <Col xs={12}>
-        <div className={`todo-item`}>
+        <div className={`todo-item ${item.isComplete ? "complete" : ""}`}>
           <div className="todo-content">{item.task}</div>
           <div>
-            <button className="button-delete" onClick={() => deleteTask(item)}>
+            <button
+              className="button-delete"
+              onClick={() => handleDeleteTask(item)}
+            >
               삭제
             </button>
-            <button className="button-delete" onClick={() => putTask(item)}>
+            <button
+              className="button-delete"
+              onClick={() => toggleIsComplete(item)}
+            >
               {item.isComplete ? "안끝남" : "끝남"}
             </button>
           </div>

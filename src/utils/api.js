@@ -32,4 +32,24 @@ api.interceptors.response.use(
   }
 );
 
-export default api;
+export const apiGetTask = () => {
+  return api.get("/tasks");
+};
+
+export const apiPostTask = (todo) => {
+  return api.post("/tasks", {
+    task: todo,
+    isComplete: false,
+  });
+};
+
+export const apiPutTask = (id, task, isComplete) => {
+  return api.put(`/tasks/${id}`, {
+    task: task,
+    isComplete: !isComplete,
+  });
+};
+
+export const apiDeleteTask = (id) => {
+  return api.delete(`/tasks/${id}`);
+};
