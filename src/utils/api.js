@@ -1,7 +1,8 @@
 import axios from "axios";
 
-const api = axios.create({
-  baseURL: `${process.env.REACT_APP_BACKEND_PROXY}/api`,
+export const api = axios.create({
+  // baseURL: `${process.env.REACT_APP_BACKEND_PROXY}/api`,
+  baseURL: `${process.env.REACT_APP_BACKEND_URL}/api`,
   headers: {
     "Content-Type": "application/json",
   },
@@ -9,6 +10,7 @@ const api = axios.create({
 /**
  * console.log all requests and responses
  */
+
 api.interceptors.request.use(
   (request) => {
     console.log("Starting Request", request);
@@ -23,6 +25,7 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => {
     console.log("Response:", response);
+
     return response;
   },
   function (error) {
