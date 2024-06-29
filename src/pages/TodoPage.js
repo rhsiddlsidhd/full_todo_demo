@@ -11,14 +11,17 @@ import {
   apiPutTask,
 } from "./../utils/api";
 import TodoBoard from "../components/TodoBoard";
+import { useNavigate } from "react-router-dom";
 
-function TodoPage() {
+function TodoPage({ setUser }) {
   const [todoList, setTodoList] = useState([]);
   const [todoValue, setTodoValue] = useState("");
+  const navigate = useNavigate();
 
   const fetchTasks = async () => {
     try {
       const res = await apiGetTask();
+      console.log("rrr", res.data.data);
       setTodoList(res.data.data);
     } catch (err) {
       console.error("Err fetchTasks fail", err.message);
@@ -69,6 +72,11 @@ function TodoPage() {
     }
   };
 
+  const handleWithLogOut = () => {
+    sessionStorage.clear("token");
+    setUser(null);
+  };
+
   useEffect(() => {
     fetchTasks();
   }, []);
@@ -92,6 +100,7 @@ function TodoPage() {
         </Col>
       </Row>
       <TodoBoard
+        handleWithLogOut={handleWithLogOut}
         todoList={todoList}
         handleDeleteTask={handleDeleteTask}
         toggleIsComplete={toggleIsComplete}

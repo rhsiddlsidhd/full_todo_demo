@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { api } from "../utils/api";
 
-const LoginPage = () => {
+const LoginPage = ({ user, setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [userData, setUserData] = useState("");
+
   const navigate = useNavigate();
 
   const handleWithLogin = async (e) => {
@@ -20,7 +20,7 @@ const LoginPage = () => {
       if (res.status !== 200) {
         throw new Error(res.error);
       } else {
-        setUserData(res.data.user);
+        setUser(res.data.user);
         sessionStorage.setItem("token", res.data.token);
         /**Bearer 관습같은.. */
         api.defaults.headers["authorization"] = "Bearer " + res.data.token;
@@ -31,6 +31,10 @@ const LoginPage = () => {
       setError(err.message);
     }
   };
+
+  if (user) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div className="display-center">

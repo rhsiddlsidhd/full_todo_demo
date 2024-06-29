@@ -1,10 +1,18 @@
 import React from "react";
 import TodoItem from "./TodoItem";
 
-const TodoBoard = ({ todoList, handleDeleteTask, toggleIsComplete }) => {
+const TodoBoard = ({
+  todoList,
+  handleDeleteTask,
+  toggleIsComplete,
+  handleWithLogOut,
+}) => {
   return (
     <div>
       <h2>Todo List</h2>
+      <div className="logout" onClick={handleWithLogOut}>
+        로그아웃
+      </div>
       {todoList.length > 0 ? (
         todoList.map((item, index) => (
           <TodoItem
